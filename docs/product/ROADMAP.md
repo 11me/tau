@@ -31,13 +31,18 @@ Exit criteria:
 
 ## Phase 1 - headless runtime core
 
+Phase 1 is the first usable headless runtime. It is not a plugin platform.
+
 Target:
 
 - one CLI binary
 - one provider first
-- basic tools: `read`, `write`, `bash`
+- minimal host kernel for model calls, tool scheduling, session persistence, retry, and operator mode orchestration
+- built-in tools: `read`, `write`, `edit`, `bash`
+- those built-ins ship as a bundled standard library behind the tool registry, not as external plugins
 - agent loop with tool calling
-- append-only sessions
+- tree-ready append-only sessions
+- automatic retry for transient model/provider failures
 - print/json modes
 
 Exit criteria:
@@ -45,6 +50,13 @@ Exit criteria:
 - usable end-to-end prompt -> tool -> continue loop
 - sessions can be resumed locally
 - runtime events are inspectable
+
+Not required for the first build:
+
+- compaction
+- plugin/extension system
+- externalizing core built-ins as plugins
+- extension compatibility commitments beyond keeping clean seams in `tools`, `runtime`, `session`, and `config`
 
 ## Phase 2 - rpc and compatibility surfaces
 
@@ -74,3 +86,5 @@ Target:
 ## Discipline
 
 Do not pull later phases forward just because a surface is documented.
+
+In particular, do not pull extension-host design into Phase 1. Phase 1 should keep clean seams in `tools`, `runtime`, `session`, and `config`, but it does not need to choose or implement the extension system.

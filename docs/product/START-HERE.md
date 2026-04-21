@@ -50,17 +50,29 @@ Current planned build target:
 
 - Go runtime only
 - headless operation first
+- minimal host kernel plus bundled standard-library tools
 - minimal tool-calling agent loop
-- append-only sessions
-- print/json/rpc surfaces before TUI
+- first built-in tools: `read`, `write`, `edit`, `bash`
+- tree-ready append-only sessions
+- automatic retry for transient model/provider failures
+- print/json surfaces in the first build
+- rpc after the core, before TUI
 
 ## Do not optimize for yet
 
 - broad feature coverage before the core exists
-- extension host compatibility
+- full extension host design or compatibility promises
 - all provider adapters
 - polished terminal UI
 - browser UI ownership
+
+## Defer, but preserve seams
+
+A full extension system is not part of the first build.
+
+For now, keep `tools`, `runtime`, `session`, and `config` boundaries clean enough that extensions can be designed later without rewriting the core.
+
+The intended Phase-1 shape is a minimal host kernel plus a bundled standard library of tools. The first tools are built into the binary, but they should still live behind the same registry/boundary style that later non-core tools can target.
 
 ## Repo memory boundaries
 
