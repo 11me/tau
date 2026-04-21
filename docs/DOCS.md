@@ -19,6 +19,14 @@ Current product docs:
 - `START-HERE.md`
 - `ARCHITECTURE.md`
 - `ROADMAP.md`
+- `IMPLEMENTATION-STATUS.md`
+
+### `docs/PLANS.md` and `docs/plans/`
+
+Use for checked-in implementation planning memory.
+
+- `docs/PLANS.md` owns the planning workflow and active plan index.
+- `docs/plans/` holds bounded implementation plans for active workstreams.
 
 ### `docs/adr/`
 
@@ -48,9 +56,12 @@ Typical promotion paths:
 research -> adr -> product
 idea -> research -> adr -> product
 idea -> product            (only for small, obvious, already-accepted changes)
+plan -> product            (when implementation work changes current truth)
 ```
 
 When a decision changes current behavior, update the owning product doc as well as the ADR.
+
+When implementation work changes current state, update `docs/product/IMPLEMENTATION-STATUS.md` as well as the relevant plan doc.
 
 ## Writing rules
 
